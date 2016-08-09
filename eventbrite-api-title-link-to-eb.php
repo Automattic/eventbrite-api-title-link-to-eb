@@ -17,6 +17,10 @@ License: GPL v2 or newer <https://www.gnu.org/licenses/gpl.txt>
  * @return string escaped URL to the event's eventbrite.com page
  */
 function eventbrite_api_title_link_to_eb( $link, $event ) {
-	return esc_url( $event->url );
+	if ( eventbrite_is_event() ) {
+		return esc_url( $event->url );
+	} else {
+		return $link;
+	}
 }
 add_filter( 'post_link', 'eventbrite_api_title_link_to_eb', 11, 2 );
